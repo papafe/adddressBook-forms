@@ -14,7 +14,7 @@ namespace AddBook.ViewModels
     {
         readonly Realm realm;
         readonly IEnumerable<Contact> allContacts;
-        readonly Contact selectedContact;
+        readonly Contact selectedContact = null;
 
         IEnumerable<Contact> contacts;
         string searchText;
