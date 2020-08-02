@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<d:BasePage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="clr-namespace:AddBook.Views"
+             x:Class="AddBook.Views.AddEditContactPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             Title="Contact"
+             x:Name="page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20" Spacing="10">
+                <Label Text="Full name"  FontSize="Large"/>
+                <Entry Text="{Binding Contact.FullName}" IsSpellCheckEnabled="False" />
+                <Label Text="Nickname" FontSize="Large" />
+                <Entry Text="{Binding Contact.Nickname}" IsSpellCheckEnabled="False" />
+                <Label Text="Address"  FontSize="Large"/>
+                <Entry Text="{Binding Contact.Address}"  IsSpellCheckEnabled="False"/>
+                <Label Text="Company"  FontSize="Large"/>
+                <Entry Text="{Binding Contact.Company}"  IsSpellCheckEnabled="False"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Email Addresses"
+                       FontSize="Large"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"/>
+                    <Button Command="{Binding AddEmailCommand}"
+                    Text="+" FontSize="Title"
+                        VerticalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout BindableLayout.ItemsSource="{Binding EmailAddresses}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Text="{Binding Address}"
+                                       Keyboard="Email"
+                                       HorizontalOptions="FillAndExpand"/>
+                                <Button Text="-" FontSize="Title"
+								    Command="{Binding Path=BindingContext.DeleteEmailCommand, Source={x:Reference page}}"
+                                    CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Phone Numbers"
+                       FontSize="Large"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"/>
+                    <Button Command="{Binding AddPhoneNumberCommand}"
+                    Text="+" FontSize="Title"
+                        VerticalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout BindableLayout.ItemsSource="{Binding PhoneNumbers}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Text="{Binding Number}"
+                                       Keyboard="Telephone"
+                                       HorizontalOptions="FillAndExpand"/>
+                                <Button Text="-" FontSize="Title"
+								    Command="{Binding Path=BindingContext.DeletePhoneNumberCommand, Source={x:Reference page}}"
+                                    CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</d:BasePage>
